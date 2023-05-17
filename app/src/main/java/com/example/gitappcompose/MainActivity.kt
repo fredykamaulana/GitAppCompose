@@ -12,6 +12,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -75,7 +76,16 @@ fun GitApp(
         topBar = {
             TopBar(
                 title = { Text(text = titlePage) },
-                navigateUp = { navController.navigateUp() },
+                navigationIcon = {
+                    if (currentRoute != Screen.UserList.route) {
+                        IconButton(onClick = { navController.navigateUp() }) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBack,
+                                contentDescription = stringResource(id = R.string.menu_back)
+                            )
+                        }
+                    }
+                },
                 actions = {
                     if (currentRoute == Screen.UserList.route) {
                         run {
